@@ -9,4 +9,19 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-# write your models here!
+class Doctor(db.Model):
+    __tablename__ = "doctors_table"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    specialty = db.Column(db.String)
+
+    time_created = db.Column(db.DateTime(timezone=True), server_default=db.func.now())
+    time_updated = db.Column(db.DateTime(timezone=True), onupdate=db.func.now())
+
+
+class Appointment(db.Model):
+    __tablename__ = "appointments_table"
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String, nullable=False)
